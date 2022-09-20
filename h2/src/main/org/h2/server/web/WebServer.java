@@ -314,16 +314,6 @@ public class WebServer implements Service {
                 serverPropertiesDir = args[++i];
             }
         }
-        Properties prop = loadProperties();
-        port = SortedProperties.getIntProperty(prop,
-                "webPort", Constants.DEFAULT_HTTP_PORT);
-        ssl = SortedProperties.getBooleanProperty(prop,
-                "webSSL", false);
-        allowOthers = SortedProperties.getBooleanProperty(prop,
-                "webAllowOthers", false);
-        setExternalNames(SortedProperties.getStringProperty(prop, "webExternalNames", null));
-        setAdminPassword(SortedProperties.getStringProperty(prop, "webAdminPassword", null));
-        commandHistoryString = prop.getProperty(COMMAND_HISTORY);
         for (int i = 0; args != null && i < args.length; i++) {
             String a = args[i];
             if (Tool.isOption(a, "-webPort")) {
@@ -352,6 +342,16 @@ public class WebServer implements Service {
                 trace = true;
             }
         }
+        Properties prop = loadProperties();
+        port = SortedProperties.getIntProperty(prop,
+                "webPort", Constants.DEFAULT_HTTP_PORT);
+        ssl = SortedProperties.getBooleanProperty(prop,
+                "webSSL", false);
+        allowOthers = SortedProperties.getBooleanProperty(prop,
+                "webAllowOthers", false);
+        setExternalNames(SortedProperties.getStringProperty(prop, "webExternalNames", null));
+        setAdminPassword(SortedProperties.getStringProperty(prop, "webAdminPassword", null));
+        commandHistoryString = prop.getProperty(COMMAND_HISTORY);
 //            if (driverList != null) {
 //                try {
 //                    String[] drivers =
